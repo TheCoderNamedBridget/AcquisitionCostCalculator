@@ -1,0 +1,9 @@
+input {
+    width: 100px
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

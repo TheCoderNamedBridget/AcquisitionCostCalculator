@@ -1,7 +1,7 @@
 // src/components/LineChart.tsx
 import React, { useRef, useEffect, useContext } from 'react';
 import { Chart, TooltipItem, registerables } from 'chart.js';
-import { InputsContext } from './InputsContext';
+import { InputsContext } from '../Inputs/InputsContext';
 
 Chart.register(...registerables);
 
@@ -96,7 +96,7 @@ const ProfitMarginGraph: React.FC = () => {
             }
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [state]);
+    }, [state.revenue, state.netProfit]);
 
     return <canvas ref={chartRef}></canvas>;
 };

@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 import ProfitMarginGraph from './components/ProfitMarginGraph';
-import Inputs from './components/Inputs';
-import { InputsProvider } from './components/InputsContext';
+import Inputs from './Inputs/Inputs';
+import { InputsProvider } from './Inputs/InputsContext';
 
 function App() {
   return (

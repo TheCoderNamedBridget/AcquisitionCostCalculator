@@ -1,0 +1,6 @@
+.inputs-column {
+    display: flex;
+    flex-direction: column;
+    background-color: lightblue;
+    width: 300px;
+}
