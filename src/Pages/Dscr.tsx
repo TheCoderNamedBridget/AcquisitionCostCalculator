@@ -41,7 +41,6 @@ const Dscr = () => {
         const denominator = 1 - ((1 + decimalInterestRate) ** -loanTerm)
         let annualPayment = numerator / denominator
 
-        console.log("annualPayment", annualPayment);
         return formatNum(annualPayment)
     }
 

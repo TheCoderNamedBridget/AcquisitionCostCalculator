@@ -20,7 +20,7 @@ const DebtSection = (props: DebtSectionProps) => {
 
     function updateDebtEntry(index: number, newDebtItem: DebtItem) {
         props.debts[index] = newDebtItem
-        let newDebts = props.debts.map((debt) => debt.id === index ? newDebtItem : newDebtItem)
+        let newDebts = props.debts.map((debt) => debt.id === index ? newDebtItem : debt)
 
         props.setDebts(newDebts)
     }
@@ -36,6 +36,7 @@ const DebtSection = (props: DebtSectionProps) => {
             {props.debts.map((debt, index) => {
                 return (
                     <div className="debt-row" key={index}>
+                        {index}
                         <DebtEntry debtItem={{ ...debt, id: index }} purchasePrice={props.purchasePrice} onChange={updateDebtEntry} />
                     </div>
                 )

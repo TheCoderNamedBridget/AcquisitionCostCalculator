@@ -11,27 +11,18 @@ type DebtEntryProps = {
 }
 
 const DebtEntry = (props: DebtEntryProps) => {
-    const [id, setId] = useState(0);
-    const [principal, setPrincipal] = useState(0);
-    const [rate, setRate] = useState(0);
-    const [loanTerm, setLoanTerm] = useState(0);
-
-
-    useEffect(() => {
-        setId(props.debtItem.id);
-        setPrincipal(props.debtItem.principal);
-        setRate(props.debtItem.interestRate);
-        setLoanTerm(props.debtItem.loanTerm);
-    }, [])
+    const [principal, setPrincipal] = useState(props.debtItem.principal);
+    const [rate, setRate] = useState(props.debtItem.interestRate);
+    const [loanTerm, setLoanTerm] = useState(props.debtItem.loanTerm);
 
     useEffect(() => {
         handleChange()
-    }, [id, principal, rate, loanTerm])
+    }, [props.debtItem.id, principal, rate, loanTerm])
 
 
     function handleChange() {
-        props.onChange(id, {
-            id: id,
+        props.onChange(props.debtItem.id, {
+            id: props.debtItem.id,
             principal: principal,
             interestRate: rate,
             loanTerm: loanTerm,
