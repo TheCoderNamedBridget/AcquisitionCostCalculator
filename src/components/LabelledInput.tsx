@@ -5,6 +5,7 @@ type LabelledInputProps = {
     labelText: string,
     value: number,
     setValue: (newValue: number) => void,
+    disabled?: boolean;
 }
 
 const LabelledInput = (props: LabelledInputProps) => {
@@ -14,9 +15,9 @@ const LabelledInput = (props: LabelledInputProps) => {
                 {props.labelText}
             </label>
             <input
-                type="number"
-                value={props.value}
+                placeholder={props.value.toString()}
                 onChange={(e) => props.setValue(Number(e.target.value))}
+                disabled={props.disabled}
             />
         </div>
     )
