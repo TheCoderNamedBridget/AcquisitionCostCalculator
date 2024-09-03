@@ -53,7 +53,7 @@ const Dscr = () => {
      * @param interestRate
      * @param principalAmount
      * @param loanTerm
-     * @param yearsDeferred when 0 payments start in year 1
+     * @param yearsDeferred when 0, payments start in year 1
      * @returns number
      */
     function calculateDeferredAnnualDebtPayment(interestRate: number, principalAmount: number, loanTerm: number, yearsDeferred: number) {

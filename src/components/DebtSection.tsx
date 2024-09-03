@@ -11,7 +11,7 @@ type DebtSectionProps = {
 
 const DebtSection = (props: DebtSectionProps) => {
     useEffect(() => {
-        props.setDebts([defaultInvestorDebtItem]);
+        props.setDebts([defaultInvestorDebtItem, defaultBankDebtItem, defaultSellerDebtItem]);
     }, [])
 
     function addDebtEntry(debtEntryType: DebtItem) {
@@ -29,14 +29,13 @@ const DebtSection = (props: DebtSectionProps) => {
         // TODO will probably want to make this a table later
         <div className="debts-section">
             <h2>Debt Section</h2>
-            <button onClick={() => addDebtEntry(defaultSellerDebtItem)}>Add Seller</button>
-            <button onClick={() => addDebtEntry(defaultBankDebtItem)}>Add Bank</button>
-            <button onClick={() => addDebtEntry(defaultInvestorDebtItem)}>Add Investor</button>
+            <button disabled onClick={() => addDebtEntry(defaultSellerDebtItem)}>Add Seller</button>
+            <button disabled onClick={() => addDebtEntry(defaultBankDebtItem)}>Add Bank</button>
+            <button disabled onClick={() => addDebtEntry(defaultInvestorDebtItem)}>Add Investor</button>
 
             {props.debts.map((debt, index) => {
                 return (
                     <div className="debt-row" key={index}>
-                        {index}
                         <DebtEntry debtItem={{ ...debt, id: index }} purchasePrice={props.purchasePrice} onChange={updateDebtEntry} />
                     </div>
                 )
