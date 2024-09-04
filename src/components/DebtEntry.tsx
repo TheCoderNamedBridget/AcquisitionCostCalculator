@@ -5,6 +5,7 @@ import "./DebtEntry.css"
 import { formatNum } from "../utilities";
 
 type DebtEntryProps = {
+    amount: number
     debtItem: DebtItem;
     purchasePrice: number;
     onChange: (index: number, newDebtItem: DebtItem) => void;
@@ -18,6 +19,11 @@ const DebtEntry = (props: DebtEntryProps) => {
     useEffect(() => {
         handleChange()
     }, [props.debtItem.id, principal, rate, loanTerm])
+
+
+    useEffect(() => {
+        setPrincipal(props.amount);
+    }, [props.amount])
 
 
     function handleChange() {

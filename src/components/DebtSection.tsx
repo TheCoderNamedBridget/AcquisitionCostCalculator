@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { DebtItem, defaultBankDebtItem, defaultInvestorDebtItem, defaultSellerDebtItem } from "../types";
 import DebtEntry from "./DebtEntry";
 import './DebtSection.css'
+import DraggablePieChart from "../draggable-pie-chart/DraggablePieChart";
+import { formatNum } from "../utilities";
 
 type DebtSectionProps = {
     purchasePrice: number;
@@ -10,13 +12,39 @@ type DebtSectionProps = {
 }
 
 const DebtSection = (props: DebtSectionProps) => {
+    const [bankAmount, setBankAmount] = useState(0)
+    const [investorAmount, setInvestorAmount] = useState(0)
+    const [sellerAmount, setSellerAmount] = useState(0)
     useEffect(() => {
         props.setDebts([defaultInvestorDebtItem, defaultBankDebtItem, defaultSellerDebtItem]);
     }, [])
 
-    function addDebtEntry(debtEntryType: DebtItem) {
-        props.setDebts([...props.debts, debtEntryType]);
+    function onPieChartChange(piechart: DraggablePieChart) {
+        // get all percentages
+        var percentages = piechart.getAllSliceSizePercentages();
+
+        setSellerAmount(formatNum(percentages[0]) / 100);
+        setInvestorAmount(formatNum(percentages[1]) / 100);
+        setBankAmount(formatNum(percentages[2]) / 100);
     }
+
+    useEffect(() => {
+        const canvas = document.createElement('canvas');
+
+        canvas.width = 600;
+        canvas.height = 400;
+        document.body.appendChild(canvas);
+        var proportions = [
+            { proportion: 50, format: { color: "#4CAF50", label: 'Seller' } },
+            { proportion: 20, format: { color: "#003366", label: 'Investor' } },
+            { proportion: 30, format: { color: "#B0BEC5", label: 'Bank' } },];
+        const piechart = new DraggablePieChart({
+            canvas: canvas,
+            proportions: proportions,
+            onchange: onPieChartChange
+        });
+        piechart.draw();
+    }, [])
 
     function updateDebtEntry(index: number, newDebtItem: DebtItem) {
         props.debts[index] = newDebtItem
@@ -26,20 +54,13 @@ const DebtSection = (props: DebtSectionProps) => {
     }
 
     return (
-        // TODO will probably want to make this a table later
         <div className="debts-section">
             <h2>Debt Section</h2>
-            <button disabled onClick={() => addDebtEntry(defaultSellerDebtItem)}>Add Seller</button>
-            <button disabled onClick={() => addDebtEntry(defaultBankDebtItem)}>Add Bank</button>
-            <button disabled onClick={() => addDebtEntry(defaultInvestorDebtItem)}>Add Investor</button>
 
-            {props.debts.map((debt, index) => {
-                return (
-                    <div className="debt-row" key={index}>
-                        <DebtEntry debtItem={{ ...debt, id: index }} purchasePrice={props.purchasePrice} onChange={updateDebtEntry} />
-                    </div>
-                )
-            })}
+
+            <DebtEntry amount={formatNum(sellerAmount * props.purchasePrice)} debtItem={{ ...defaultSellerDebtItem, id: 0, }} purchasePrice={props.purchasePrice} onChange={updateDebtEntry} />
+            <DebtEntry amount={formatNum(bankAmount * props.purchasePrice)} debtItem={{ ...defaultBankDebtItem, id: 1 }} purchasePrice={props.purchasePrice} onChange={updateDebtEntry} />
+            <DebtEntry amount={formatNum(investorAmount * props.purchasePrice)} debtItem={{ ...defaultInvestorDebtItem, id: 2 }} purchasePrice={props.purchasePrice} onChange={updateDebtEntry} />
         </div>
     )
 }

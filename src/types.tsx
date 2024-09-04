@@ -9,7 +9,7 @@ export const defaultDebtItem: DebtItem = {
     id: 0,
     principal: 10,
     interestRate: 1,
-    loanTerm: 5,
+    loanTerm: 10,
 }
 
 export const defaultSellerDebtItem: DebtItem = {
