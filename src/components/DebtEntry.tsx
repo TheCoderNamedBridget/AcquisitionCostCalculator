@@ -47,10 +47,10 @@ const DebtEntry = (props: DebtEntryProps) => {
     return (
         // TODO: switch out the debt entries to be something more row like without labels
         <div className="debt-entry">
-            <LabelledInput labelText={"Amount"} value={principal} setValue={setPrincipal} />
-            <LabelledInput labelText={"Rate %"} value={rate} setValue={setRate} disabled={true} />
-            <LabelledInput labelText={"Loan Term"} value={loanTerm} setValue={setLoanTerm} disabled={true} />
-            {formatNum(getLoanPercentageOfPurchasePrice(principal))} %
+            <LabelledInput value={principal} setValue={setPrincipal} />
+            <LabelledInput value={rate} setValue={setRate} disabled={true} />
+            <LabelledInput value={loanTerm} setValue={setLoanTerm} disabled={true} />
+            {formatNum(getLoanPercentageOfPurchasePrice(principal))}%
         </div>
     )
 }

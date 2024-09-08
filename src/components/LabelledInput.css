@@ -6,4 +6,11 @@ input {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 350px;
+    margin-right: 20px;
+}
+
+.text {
+    /* width: 100px; */
+    margin-right: 20px;
 }

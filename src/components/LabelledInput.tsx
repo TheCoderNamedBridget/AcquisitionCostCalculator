@@ -2,7 +2,7 @@ import React from 'react';
 import './LabelledInput.css'
 
 type LabelledInputProps = {
-    labelText: string,
+    labelText?: string,
     value: number,
     setValue: (newValue: number) => void,
     disabled?: boolean;
@@ -11,9 +11,12 @@ type LabelledInputProps = {
 const LabelledInput = (props: LabelledInputProps) => {
     return (
         <div className="row">
-            <label>
-                {props.labelText}
-            </label>
+            {
+                props.labelText &&
+                <label>
+                    {props.labelText}
+                </label>
+            }
             <input
                 placeholder={props.value.toString()}
                 onChange={(e) => props.setValue(Number(e.target.value))}
