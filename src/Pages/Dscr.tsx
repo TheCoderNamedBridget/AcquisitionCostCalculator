@@ -3,8 +3,6 @@ import LabelledInput from "../components/LabelledInput";
 import DebtSection from "../components/DebtSection";
 import { DebtItem } from "../types";
 import { formatNum } from "../utilities";
-import './Dscr.css'
-
 
 /**
  * Class for calculating the DSCR in a various year
@@ -79,16 +77,13 @@ const Dscr = () => {
     }, [purchasePrice, downPayment, sde, debts])
 
     return (
-        <div className="dscr">
+        <div >
             <h2>Dscr</h2>
-            <div className="dscr-inputs">
-                <LabelledInput labelText={"Purchase Price"} value={purchasePrice} setValue={setPurchasePrice} />
-                <LabelledInput labelText={"Down Payment"} value={downPayment} setValue={setDownPayment} />
-                <LabelledInput labelText={"SDE"} value={sde} setValue={setSde} />
-            </div>
+            <LabelledInput labelText={"Purchase Price"} value={purchasePrice} setValue={setPurchasePrice} />
+            <LabelledInput labelText={"Down Payment"} value={downPayment} setValue={setDownPayment} />
+            <LabelledInput labelText={"SDE"} value={sde} setValue={setSde} />
             <br />
-            <DebtSection purchasePrice={purchasePrice} debts={debts} setDebts={setDebts} />
-            <label> DSCR: {formatNum(dscr)}</label>
+            <DebtSection purchasePrice={purchasePrice} debts={debts} setDebts={setDebts} dscr={dscr} />
         </div>
     )
 }
