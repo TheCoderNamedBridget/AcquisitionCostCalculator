@@ -18,13 +18,15 @@ const DebtSection = (props: DebtSectionProps) => {
     const [bankAmount, setBankAmount] = useState(0)
     const [investorAmount, setInvestorAmount] = useState(0)
     const [sellerAmount, setSellerAmount] = useState(0)
+
+    const [investorEquity, setInvestorEquity] = useState(0);
     useEffect(() => {
         props.setDebts([defaultInvestorDebtItem, defaultBankDebtItem, defaultSellerDebtItem]);
 
         const canvas = document.getElementById('customCanvas') as HTMLCanvasElement;
         if (canvas) {
-            canvas.width = 600;
-            canvas.height = 400;
+            // canvas.width = 600;
+            // canvas.height = 400;
             // TODO: finish linking the proportion to the input so that it can be changed bi-directionally?
             var proportions = [
                 { proportion: 50, format: { color: "#4CAF50", label: 'Seller' } },
@@ -37,7 +39,11 @@ const DebtSection = (props: DebtSectionProps) => {
             });
             piechart.draw();
         }
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        setInvestorEquity(formatNum(investorAmount * 1.7));
+    }, [investorAmount])
 
     function onPieChartChange(piechart: DraggablePieChart) {
         var percentages = piechart.getAllSliceSizePercentages();
@@ -62,7 +68,7 @@ const DebtSection = (props: DebtSectionProps) => {
                     <canvas id="customCanvas" />
                 </div>
                 <div className="outputs">
-                    <StaticPieChart title="Percentage Owned" />
+                    <StaticPieChart title="Percentage Owned" labels={["investor", "buyer"]} data={[investorEquity, formatNum((1 - investorEquity))]} />
                     <LabelledRow labelText={["Amount", "Rate %", "Loan Term"]}></LabelledRow>
                     <DebtEntry amount={formatNum(sellerAmount * props.purchasePrice)} debtItem={{ ...defaultSellerDebtItem, id: 0, }} purchasePrice={props.purchasePrice} onChange={updateDebtEntry} />
                     <DebtEntry amount={formatNum(bankAmount * props.purchasePrice)} debtItem={{ ...defaultBankDebtItem, id: 1 }} purchasePrice={props.purchasePrice} onChange={updateDebtEntry} />

@@ -60,7 +60,7 @@ const StaticPieChart = ({ title = "chart", labels = ["label", "label2", "label3"
             }
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [data]);
 
     return (<canvas ref={chartRef} />)
 }
