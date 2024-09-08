@@ -3,6 +3,7 @@ import LabelledInput from "../components/LabelledInput";
 import DebtSection from "../components/DebtSection";
 import { DebtItem } from "../types";
 import { formatNum } from "../utilities";
+import './Dscr.css'
 
 
 /**
@@ -79,9 +80,12 @@ const Dscr = () => {
 
     return (
         <div className="dscr">
-            <LabelledInput labelText={"Purchase Price"} value={purchasePrice} setValue={setPurchasePrice} />
-            <LabelledInput labelText={"Down Payment"} value={downPayment} setValue={setDownPayment} />
-            <LabelledInput labelText={"Seller Discretionary Earnings"} value={sde} setValue={setSde} />
+            <h2>Dscr</h2>
+            <div className="dscr-inputs">
+                <LabelledInput labelText={"Purchase Price"} value={purchasePrice} setValue={setPurchasePrice} />
+                <LabelledInput labelText={"Down Payment"} value={downPayment} setValue={setDownPayment} />
+                <LabelledInput labelText={"SDE"} value={sde} setValue={setSde} />
+            </div>
             <br />
             <DebtSection purchasePrice={purchasePrice} debts={debts} setDebts={setDebts} />
             <label> DSCR: {formatNum(dscr)}</label>

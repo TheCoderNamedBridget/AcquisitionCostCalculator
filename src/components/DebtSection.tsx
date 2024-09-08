@@ -56,8 +56,6 @@ const DebtSection = (props: DebtSectionProps) => {
     return (
         <div className="debts-section">
             <h2>Debt Section</h2>
-
-
             <DebtEntry amount={formatNum(sellerAmount * props.purchasePrice)} debtItem={{ ...defaultSellerDebtItem, id: 0, }} purchasePrice={props.purchasePrice} onChange={updateDebtEntry} />
             <DebtEntry amount={formatNum(bankAmount * props.purchasePrice)} debtItem={{ ...defaultBankDebtItem, id: 1 }} purchasePrice={props.purchasePrice} onChange={updateDebtEntry} />
             <DebtEntry amount={formatNum(investorAmount * props.purchasePrice)} debtItem={{ ...defaultInvestorDebtItem, id: 2 }} purchasePrice={props.purchasePrice} onChange={updateDebtEntry} />

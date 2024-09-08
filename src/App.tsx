@@ -7,7 +7,7 @@ import Dscr from './Pages/Dscr';
 function App() {
   return (
     <InputsProvider >
-      <h2>Acquisition Costs Calculator</h2>
+      <h2 className="header">Acquisition Costs Calculator</h2>
       {/* <ProfitMarginGraph /> */}
       <Dscr />
     </InputsProvider>
