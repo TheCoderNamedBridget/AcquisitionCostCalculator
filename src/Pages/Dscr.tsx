@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import LabelledInput from "../components/LabelledInput";
 import DebtSection from "../components/DebtSection";
-import { DebtItem } from "../types";
+import { DebtItem, defaultBankDebtItem, defaultInvestorDebtItem, defaultSellerDebtItem } from "../types";
 import { formatNum } from "../utilities";
+import DraggablePieChart from "../components/draggable-pie-chart/DraggablePieChart";
 
 /**
  * Class for calculating the DSCR in a various year
@@ -17,10 +18,12 @@ const Dscr = () => {
     const [purchasePrice, setPurchasePrice] = useState(10);
     const [downPayment, setDownPayment] = useState(0); //inital buyer investment
     const [sde, setSde] = useState(1);
-
     const [debts, setDebts] = useState<DebtItem[]>([]);
-
     const [dscr, setDscr] = useState(0);
+
+    const [bankAmount, setBankAmount] = useState(0)
+    const [investorAmount, setInvestorAmount] = useState(0)
+    const [sellerAmount, setSellerAmount] = useState(0)
 
     /**
      * For a debt item calculate the payment in a given year, rounded to 2 decimal
@@ -74,16 +77,66 @@ const Dscr = () => {
 
     useEffect(() => {
         setDscr(calculateDscr())
-    }, [purchasePrice, downPayment, sde, debts])
+    }, [purchasePrice, downPayment, sde, debts]);
+
+    useEffect(() => {
+        setDebts([defaultInvestorDebtItem, defaultBankDebtItem, defaultSellerDebtItem]);
+
+        const canvas = document.getElementById('customCanvas') as HTMLCanvasElement;
+        if (canvas) {
+            // canvas.width = 600;
+            // canvas.height = 400;
+            // TODO: finish linking the proportion to the input so that it can be changed bi-directionally?
+            var proportions = [
+                { proportion: 50, format: { color: "#4CAF50", label: 'Seller' } },
+                { proportion: 20, format: { color: "#0073e6", label: 'Investor' } },
+                { proportion: 30, format: { color: "#B0BEC5", label: 'Bank' } },];
+            const piechart = new DraggablePieChart({
+                canvas: canvas,
+                proportions: proportions,
+                onchange: onPieChartChange
+            });
+            piechart.draw();
+        }
+    }, []);
+
+    function onPieChartChange(piechart: DraggablePieChart) {
+        var percentages = piechart.getAllSliceSizePercentages();
+
+        setSellerAmount(formatNum(percentages[0]) / 100);
+        setInvestorAmount(formatNum(percentages[1]) / 100);
+        setBankAmount(formatNum(percentages[2]) / 100);
+    }
+
 
     return (
         <div >
-            <h2>Dscr</h2>
-            <LabelledInput labelText={"Purchase Price"} value={purchasePrice} setValue={setPurchasePrice} />
-            <LabelledInput labelText={"Down Payment"} value={downPayment} setValue={setDownPayment} />
-            <LabelledInput labelText={"SDE"} value={sde} setValue={setSde} />
-            <br />
-            <DebtSection purchasePrice={purchasePrice} debts={debts} setDebts={setDebts} dscr={dscr} />
+            <h2 className="header">Dscr</h2>
+            <div className="display">
+                <div className="inputs">
+                    <br />
+                    <LabelledInput labelText={"Purchase Price"} value={purchasePrice} setValue={setPurchasePrice} />
+                    <LabelledInput labelText={"Down Payment"} value={downPayment} setValue={setDownPayment} />
+                    <LabelledInput labelText={"SDE"} value={sde} setValue={setSde} />
+                    <br />
+                    <br />
+                    <canvas id="customCanvas" />
+                </div>
+                <div className="outputs">
+                    <DebtSection
+                        totalDebt={purchasePrice - downPayment}
+                        debts={debts}
+                        setDebts={setDebts}
+                        dscr={dscr}
+                        bankAmount={bankAmount}
+                        setBankAmount={setBankAmount}
+                        investorAmount={investorAmount}
+                        setInvestorAmount={setInvestorAmount}
+                        sellerAmount={sellerAmount}
+                        setSellerAmount={setSellerAmount}
+                    />
+                </div>
+            </div>
         </div>
     )
 }
