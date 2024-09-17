@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { create, all } from 'mathjs';
 
 // TODO: set this up so that someone can enter a list of profits and can get the irr based on that

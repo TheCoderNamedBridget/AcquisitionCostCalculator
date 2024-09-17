@@ -2,7 +2,7 @@ import './App.css';
 import { InputsProvider } from './Inputs/InputsContext';
 import Dscr from './Pages/Dscr';
 import DebtTable from './components/DebtTable';
-import Irr from './components/Irr';
+import Irr from './Pages/Irr';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 function App() {
@@ -20,7 +20,12 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Dscr />} />
-          <Route path="/irr" element={<Irr cashFlows={[]} initialGuess={0} tolerance={0} maxIterations={0} />} />
+          <Route path="/irr" element={<Irr
+            cashFlows={[-1000, 300, 400, 500, 600]}
+            initialGuess={0.1}
+            tolerance={1e-6}
+            maxIterations={100}
+          />} />
           <Route path="/debt-table" element={<DebtTable />} />
         </Routes>
       </Router>
