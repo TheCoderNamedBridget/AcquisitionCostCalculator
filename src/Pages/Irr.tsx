@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { create, all } from 'mathjs';
+import LabelledInput from '../components/LabelledInput';
 
 // TODO: set this up so that someone can enter a list of profits and can get the irr based on that
 
@@ -53,10 +54,22 @@ const Irr = (props: IrrProps) => {
     }
     return (
         <>
+            <h2 className="header">Irr</h2>
+            Cashflows: {JSON.stringify(props.cashFlows)}
+            <LabelledInput disabled labelText="Initial Guess" value={props.initialGuess} setValue={function (newValue: number): void {
+                throw new Error('Function not implemented.');
+            }} />
+            <LabelledInput disabled labelText="Tolerance" value={props.tolerance} setValue={function (newValue: number): void {
+                throw new Error('Function not implemented.');
+            }} />
+            <LabelledInput disabled labelText="Max iterations" value={props.maxIterations} setValue={function (newValue: number): void {
+                throw new Error('Function not implemented.');
+            }} />
             <label>
-                Internal Re-occuring revenue: {irr && (irr * 100).toFixed(2)} %
+                Internal Re-occuring revenue:
             </label>
             <button onClick={() => findIrrNow()}>Find Irr</button>
+            {irr && (irr * 100).toFixed(2)} %
         </>
     )
 }
