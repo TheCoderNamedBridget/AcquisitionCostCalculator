@@ -44,7 +44,7 @@ const DebtSection = (props: DebtSectionProps) => {
             <DebtEntry amount={formatNum(props.investorAmount * props.totalDebt)} debtItem={{ ...defaultInvestorDebtItem, id: 2 }} purchasePrice={props.totalDebt} onChange={updateDebtEntry} />
             <br />
             <label> DSCR: {formatNum(props.dscr)}</label>
-            <br />
+            {investorEquity > 1 ? <p>Warning: investor equity is over 100%</p> : <br />}
             <StaticPieChart title="Percentage Owned" labels={["investor", "buyer"]} data={[investorEquity, formatNum((1 - investorEquity))]} />
         </div>
     )
