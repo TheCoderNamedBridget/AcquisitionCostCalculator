@@ -50,93 +50,95 @@ const DebtTable: React.FC = () => {
             <h2>Debt</h2>
 
             <table border={1}>
-                <tr>
-                    <th>Principal</th>
-                    <th>Interest Rate</th>
-                    <th>Term</th>
-                    <th>Amortization</th>
-                    <th>Monthly Payment</th>
-                    <th>Total Interest Paid</th>
-                    <th>Balloon Payment</th>
-                    <th>Early Repayment Penalty</th>
-                    <th>Grace Period</th>
-                    <th>Loan-to-Value Ratio</th>
-                    <th>Debt Service Coverage Ratio</th>
-                </tr>
-                <tr>
-                    <td>
-                        <input
-                            type="number"
-                            value={state.debtDetails.principal}
-                            onChange={(e) => setDebtDetails({ ...state.debtDetails, principal: Number(e.target.value) })}
-                        />
-                    </td>
-                    <td>
-                        <input
-                            type="number"
-                            value={state.debtDetails.interestRate}
-                            onChange={(e) => setDebtDetails({ ...state.debtDetails, interestRate: Number(e.target.value) })}
-                        />%
-                    </td>
-                    <td>
-                        <input
-                            type="number"
-                            value={state.debtDetails.term}
-                            onChange={(e) => setDebtDetails({ ...state.debtDetails, term: Number(e.target.value) })}
-                        /> months
-                    </td>
-                    <td>
-                        <input
-                            type="text"
-                            value={state.debtDetails.amortization}
-                            onChange={(e) => setDebtDetails({ ...state.debtDetails, amortization: e.target.value })}
-                        />
-                    </td>
-                    <td>
-                        <input
-                            type="number"
-                            value={state.debtDetails.monthlyPayment.toFixed(2)}
-                            onChange={(e) => setDebtDetails({ ...state.debtDetails, monthlyPayment: Number(e.target.value) })}
-                        />
-                    </td>
-                    <td>${state.debtDetails.totalInterestPaid.toFixed(2)}</td>
-                    <td>
-                        <input
-                            type="number"
-                            value={state.debtDetails.balloonPayment.toFixed(2)}
-                            onChange={(e) => setDebtDetails({ ...state.debtDetails, balloonPayment: Number(e.target.value) })}
-                        />
-                    </td>
-                    <td>
-                        <input
-                            type="number"
-                            value={state.debtDetails.earlyRepaymentPenalty.toFixed(2)}
-                            onChange={(e) => setDebtDetails({ ...state.debtDetails, earlyRepaymentPenalty: Number(e.target.value) })}
-                        />
-                    </td>
-                    <td>
-                        <input
-                            type="text"
-                            value={state.debtDetails.gracePeriod}
-                            onChange={(e) => setDebtDetails({ ...state.debtDetails, gracePeriod: e.target.value })}
-                        />
-                    </td>
-                    <td>
-                        <input
-                            type="number"
-                            value={state.debtDetails.loanToValueRatio.toFixed(2)}
-                            onChange={(e) => setDebtDetails({ ...state.debtDetails, loanToValueRatio: Number(e.target.value) })}
-                        />%
-                    </td>
-                    <td>
-                        <input
-                            type="number"
-                            value={state.debtDetails.debtServiceCoverageRatio.toFixed(2)}
-                            onChange={(e) => setDebtDetails({ ...state.debtDetails, debtServiceCoverageRatio: Number(e.target.value) })}
-                        />
-                    </td>
+                <tbody>
+                    <tr>
+                        <th>Principal</th>
+                        <th>Interest Rate</th>
+                        <th>Term</th>
+                        <th>Amortization</th>
+                        <th>Monthly Payment</th>
+                        <th>Total Interest Paid</th>
+                        <th>Balloon Payment</th>
+                        <th>Early Repayment Penalty</th>
+                        <th>Grace Period</th>
+                        <th>Loan-to-Value Ratio</th>
+                        <th>Debt Service Coverage Ratio</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input
+                                type="number"
+                                value={state.debtDetails.principal}
+                                onChange={(e) => setDebtDetails({ ...state.debtDetails, principal: Number(e.target.value) })}
+                            />
+                        </td>
+                        <td>
+                            <input
+                                type="number"
+                                value={state.debtDetails.interestRate}
+                                onChange={(e) => setDebtDetails({ ...state.debtDetails, interestRate: Number(e.target.value) })}
+                            />%
+                        </td>
+                        <td>
+                            <input
+                                type="number"
+                                value={state.debtDetails.term}
+                                onChange={(e) => setDebtDetails({ ...state.debtDetails, term: Number(e.target.value) })}
+                            /> months
+                        </td>
+                        <td>
+                            <input
+                                type="text"
+                                value={state.debtDetails.amortization}
+                                onChange={(e) => setDebtDetails({ ...state.debtDetails, amortization: e.target.value })}
+                            />
+                        </td>
+                        <td>
+                            <input
+                                type="number"
+                                value={state.debtDetails.monthlyPayment.toFixed(2)}
+                                onChange={(e) => setDebtDetails({ ...state.debtDetails, monthlyPayment: Number(e.target.value) })}
+                            />
+                        </td>
+                        <td>${state.debtDetails.totalInterestPaid.toFixed(2)}</td>
+                        <td>
+                            <input
+                                type="number"
+                                value={state.debtDetails.balloonPayment.toFixed(2)}
+                                onChange={(e) => setDebtDetails({ ...state.debtDetails, balloonPayment: Number(e.target.value) })}
+                            />
+                        </td>
+                        <td>
+                            <input
+                                type="number"
+                                value={state.debtDetails.earlyRepaymentPenalty.toFixed(2)}
+                                onChange={(e) => setDebtDetails({ ...state.debtDetails, earlyRepaymentPenalty: Number(e.target.value) })}
+                            />
+                        </td>
+                        <td>
+                            <input
+                                type="text"
+                                value={state.debtDetails.gracePeriod}
+                                onChange={(e) => setDebtDetails({ ...state.debtDetails, gracePeriod: e.target.value })}
+                            />
+                        </td>
+                        <td>
+                            <input
+                                type="number"
+                                value={state.debtDetails.loanToValueRatio.toFixed(2)}
+                                onChange={(e) => setDebtDetails({ ...state.debtDetails, loanToValueRatio: Number(e.target.value) })}
+                            />%
+                        </td>
+                        <td>
+                            <input
+                                type="number"
+                                value={state.debtDetails.debtServiceCoverageRatio.toFixed(2)}
+                                onChange={(e) => setDebtDetails({ ...state.debtDetails, debtServiceCoverageRatio: Number(e.target.value) })}
+                            />
+                        </td>
 
-                </tr>
+                    </tr>
+                </tbody>
             </table>
         </>
     );
