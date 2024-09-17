@@ -45,7 +45,6 @@ const DebtEntry = (props: DebtEntryProps) => {
     }
 
     return (
-        // TODO: switch out the debt entries to be something more row like without labels
         <div className="debt-entry">
             <LabelledInput value={principal} setValue={setPrincipal} disabled />
             <LabelledInput value={rate} setValue={setRate} disabled />
