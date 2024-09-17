@@ -1,9 +1,9 @@
 
 
 /**
- * Formats num to 2 decimal places
+ * Formats num to numDecimalPlaces
  * @param num 
  */
-export function formatNum(num: number) {
-    return Number(num.toFixed(3))
+export function formatNum(num: number, numDecimalPlaces: number = 2) {
+    return Number(num.toFixed(numDecimalPlaces))
 }
