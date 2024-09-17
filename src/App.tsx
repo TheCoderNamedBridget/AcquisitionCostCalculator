@@ -11,14 +11,12 @@ function App() {
     <InputsProvider >
       <h2 className="header">Acquisition Costs Calculator</h2>
       <Router>
-        <nav>
-          <ul>
-            <li><Link to="/">DSCR</Link></li>
-            <li><Link to="/irr">IRR</Link></li>
-            <li><Link to="/debt-table">Debt Table (wip)</Link></li>
-            <li><Link to="/profit-margin-graph">Profit Margin (wip)</Link></li>
-          </ul>
-        </nav>
+        <div className="display">
+          <Link to="/">DSCR</Link>
+          <Link to="/irr">IRR</Link>
+          <Link to="/debt-table">Debt Table (wip)</Link>
+          <Link to="/profit-margin-graph">Profit Margin (wip)</Link>
+        </div>
 
         <Routes>
           <Route path="/" element={<Dscr />} />

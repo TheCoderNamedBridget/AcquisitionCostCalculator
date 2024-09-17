@@ -47,7 +47,7 @@ const DebtTable: React.FC = () => {
 
     return (
         <>
-            <h2>Debt</h2>
+            <h2 className="header">Debt</h2>
 
             <table border={1}>
                 <tbody>
