@@ -6,16 +6,17 @@ import LabelledRow from "./LabelledRow";
 import StaticPieChart from "./static-pie-chart/StaticPieChart";
 
 type DebtSectionProps = {
-    totalDebt: number;
+    totalDebt: number,
     debts: DebtItem[],
-    setDebts: (debt: DebtItem[]) => void
-    dscr: number;
-    bankAmount: number;
-    setBankAmount: (bankAmount: number) => void
-    investorAmount: number;
-    setInvestorAmount: (investorAmount: number) => void
-    sellerAmount: number;
-    setSellerAmount: (sellerAmount: number) => void
+    setDebts: (debt: DebtItem[]) => void,
+    dscr: number,
+    bankAmount: number,
+    setBankAmount: (bankAmount: number) => void,
+    investorAmount: number,
+    setInvestorAmount: (investorAmount: number) => void,
+    sellerAmount: number,
+    setSellerAmount: (sellerAmount: number) => void,
+    stepUp: number,
 }
 
 const DebtSection = (props: DebtSectionProps) => {
@@ -25,8 +26,8 @@ const DebtSection = (props: DebtSectionProps) => {
     }, []);
 
     useEffect(() => {
-        setInvestorEquity(formatNum(props.investorAmount * 1.7));
-    }, [props.investorAmount])
+        setInvestorEquity(formatNum(props.investorAmount * props.stepUp));
+    }, [props.investorAmount, props.stepUp])
 
 
     function updateDebtEntry(index: number, newDebtItem: DebtItem) {

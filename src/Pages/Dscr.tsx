@@ -21,9 +21,11 @@ const Dscr = () => {
     const [debts, setDebts] = useState<DebtItem[]>([]);
     const [dscr, setDscr] = useState(0);
 
-    const [bankAmount, setBankAmount] = useState(0)
-    const [investorAmount, setInvestorAmount] = useState(0)
-    const [sellerAmount, setSellerAmount] = useState(0)
+    const [bankAmount, setBankAmount] = useState(0);
+    const [investorAmount, setInvestorAmount] = useState(0);
+    const [sellerAmount, setSellerAmount] = useState(0);
+
+    const [stepUp, setStepUp] = useState("1.7");
 
     /**
      * For a debt item calculate the payment in a given year, rounded to 2 decimal
@@ -117,7 +119,17 @@ const Dscr = () => {
                     <LabelledInput labelText={"Purchase Price"} value={purchasePrice} setValue={setPurchasePrice} />
                     <LabelledInput labelText={"Down Payment"} value={downPayment} setValue={setDownPayment} />
                     <LabelledInput labelText={"SDE"} value={sde} setValue={setSde} />
-                    <br />
+                    <div className="row">
+                        <>Step up: {stepUp}</>
+                        <input
+                            type="range"
+                            min="1"
+                            max="3"
+                            step="0.1"
+                            value={stepUp}
+                            onChange={(event) => setStepUp(event.target.value)}
+                        />
+                    </div>
                     <br />
                     <br />
                     <br />
@@ -136,6 +148,7 @@ const Dscr = () => {
                         setInvestorAmount={setInvestorAmount}
                         sellerAmount={sellerAmount}
                         setSellerAmount={setSellerAmount}
+                        stepUp={Number(stepUp)}
                     />
                 </div>
             </div>
