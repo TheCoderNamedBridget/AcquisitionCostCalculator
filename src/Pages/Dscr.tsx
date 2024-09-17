@@ -84,8 +84,8 @@ const Dscr = () => {
 
         const canvas = document.getElementById('customCanvas') as HTMLCanvasElement;
         if (canvas) {
-            canvas.width = 600;
-            canvas.height = 400;
+            canvas.width = 300;
+            canvas.height = 250;
             var proportions = [
                 { proportion: 50, format: { color: "#4CAF50", label: 'Seller' } },
                 { proportion: 20, format: { color: "#0073e6", label: 'Investor' } },
@@ -117,6 +117,9 @@ const Dscr = () => {
                     <LabelledInput labelText={"Purchase Price"} value={purchasePrice} setValue={setPurchasePrice} />
                     <LabelledInput labelText={"Down Payment"} value={downPayment} setValue={setDownPayment} />
                     <LabelledInput labelText={"SDE"} value={sde} setValue={setSde} />
+                    <br />
+                    <br />
+                    <br />
                     <br />
                     <br />
                     <canvas id="customCanvas" />
