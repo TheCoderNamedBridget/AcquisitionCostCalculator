@@ -14,7 +14,7 @@ function App() {
         <nav>
           <ul>
             <li><Link to="/">DSCR</Link></li>
-            <li><Link to="/irr">IRR (wip)</Link></li>
+            <li><Link to="/irr">IRR</Link></li>
             <li><Link to="/debt-table">Debt Table (wip)</Link></li>
             <li><Link to="/profit-margin-graph">Profit Margin (wip)</Link></li>
           </ul>
@@ -22,12 +22,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Dscr />} />
-          <Route path="/irr" element={<Irr
-            cashFlows={[-1000, 300, 400, 500, 600]}
-            initialGuess={0.1}
-            tolerance={1e-6}
-            maxIterations={100}
-          />} />
+          <Route path="/irr" element={<Irr />} />
           <Route path="/debt-table" element={<DebtTable />} />
           <Route path="/profit-margin-graph" element={<ProfitMarginGraph />} />
         </Routes>
