@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { DebtItem, defaultBankDebtItem, defaultInvestorDebtItem, defaultSellerDebtItem } from "../types";
 import DebtEntry from "./DebtEntry";
-import './DebtSection.css'
 import { formatNum } from "../utilities";
 import LabelledRow from "./LabelledRow";
 import StaticPieChart from "./static-pie-chart/StaticPieChart";

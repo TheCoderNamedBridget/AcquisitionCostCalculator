@@ -63,7 +63,7 @@ const Irr = () => {
             <LabelledInput disabled labelText="Tolerance" value={tolerance} setValue={setTolerance} />
             <LabelledInput disabled labelText="Max iterations" value={maxIterations} setValue={setMaxIterations} />
             <label>
-                Internal Re-occuring revenue:
+                Internal rate of return:
             </label>
             <button onClick={() => findIrrNow()}>Find Irr</button>
             {irr && (irr * 100).toFixed(2)} %

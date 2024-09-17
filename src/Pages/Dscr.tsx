@@ -84,9 +84,8 @@ const Dscr = () => {
 
         const canvas = document.getElementById('customCanvas') as HTMLCanvasElement;
         if (canvas) {
-            // canvas.width = 600;
-            // canvas.height = 400;
-            // TODO: finish linking the proportion to the input so that it can be changed bi-directionally?
+            canvas.width = 600;
+            canvas.height = 400;
             var proportions = [
                 { proportion: 50, format: { color: "#4CAF50", label: 'Seller' } },
                 { proportion: 20, format: { color: "#0073e6", label: 'Investor' } },
