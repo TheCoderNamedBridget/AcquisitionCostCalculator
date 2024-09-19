@@ -12,16 +12,20 @@ import DraggablePieChart from "../components/draggable-pie-chart/DraggablePieCha
  * Debt payments start in year 0
  * Payments are made in equal amounts over the loan term
  * 
+ * TODO: consider adding FCCR in future (accounts for investor payments)
+ * 
  */
 
 const Dscr = () => {
-    const [purchasePrice, setPurchasePrice] = useState(10);
-    const [downPayment, setDownPayment] = useState(2); //inital buyer investment
-    const [sde, setSde] = useState(3);
+    const [purchasePrice, setPurchasePrice] = useState(1000000);
+    const [downPayment, setDownPayment] = useState(200000); //inital buyer investment
+    const [sde, setSde] = useState(300000);
     const [debts, setDebts] = useState<DebtItem[]>([]);
     const [dscr, setDscr] = useState(0);
 
     const [bankAmount, setBankAmount] = useState(0);
+    // The investor amount is not debt, you do not buy pay it down
+    // they buy it and own it 
     const [investorAmount, setInvestorAmount] = useState(0);
     const [sellerAmount, setSellerAmount] = useState(0);
 
@@ -61,16 +65,20 @@ const Dscr = () => {
      * @returns number
      */
     function calculateDeferredAnnualDebtPayment(interestRate: number, principalAmount: number, loanTerm: number, yearsDeferred: number) {
-        let principalWithInterest = principalAmount * ((1 + interestRate) ** yearsDeferred);
+        let principalWithInterest = (principalAmount * ((1 + interestRate) ** yearsDeferred));
+
+        console.log("interestRate", interestRate);
+
+        console.log("principalWithInterest", principalWithInterest);
         let newLoanTerm = loanTerm - yearsDeferred;
 
         return calculateAnnualDebtPayment(interestRate, principalWithInterest, newLoanTerm)
     }
 
     function calculateDscr(year: number = 1) {
-        let debtPayments = debts.map((debt) => calculateDeferredAnnualDebtPayment(debt.interestRate, debt.principal, debt.loanTerm, 0))
+        let debtPayments = debts.map((debt) => calculateDeferredAnnualDebtPayment((debt.interestRate / 100), debt.principal, debt.loanTerm, 0))
         let summedPayment = debtPayments.length > 0 ? debtPayments.reduce((curSum, curVal) => curSum + curVal) : 0;
-        let denominator = downPayment + summedPayment;
+        let denominator = summedPayment;
 
         let dscr = sde / (denominator)
 
@@ -82,7 +90,8 @@ const Dscr = () => {
     }, [purchasePrice, downPayment, sde, debts]);
 
     useEffect(() => {
-        setDebts([defaultInvestorDebtItem, defaultBankDebtItem, defaultSellerDebtItem]);
+        // investor payments are not included in dscr
+        setDebts([defaultBankDebtItem, defaultSellerDebtItem]);
 
         const canvas = document.getElementById('customCanvas') as HTMLCanvasElement;
         if (canvas) {
