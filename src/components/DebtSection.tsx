@@ -37,14 +37,25 @@ const DebtSection = (props: DebtSectionProps) => {
         props.setDebts(newDebts)
     }
 
+    function dscrRater(dscr: number) {
+        if (dscr < 1) {
+            return "High risk (p bad)"
+        } else if (dscr < 1.25) {
+            return "Medium risk (eh)"
+        } else {
+            return "Low risk (p good)"
+        }
+    }
+
     return (
         <div className="outputs">
             <LabelledRow labelText={["Amount", "Rate %", "Loan Term"]}></LabelledRow>
             <DebtEntry amount={formatNum(props.sellerAmount * props.totalDebt)} debtItem={{ ...defaultSellerDebtItem, id: 0, }} purchasePrice={props.totalDebt} onChange={updateDebtEntry} />
             <DebtEntry amount={formatNum(props.bankAmount * props.totalDebt)} debtItem={{ ...defaultBankDebtItem, id: 1 }} purchasePrice={props.totalDebt} onChange={updateDebtEntry} />
             <DebtEntry amount={formatNum(props.investorAmount * props.totalDebt)} debtItem={{ ...defaultInvestorDebtItem, id: 2 }} purchasePrice={props.totalDebt} onChange={() => console.log()} />
+            <label> DSCR: {formatNum(props.dscr)} </label>
             <br />
-            <label> DSCR: {formatNum(props.dscr)}</label>
+            {dscrRater(props.dscr)}
             {investorEquity > 1 ? <p>Warning: investor equity is over 100%(reduce step up or investor debt)</p> : <br />}
             <StaticPieChart title="Percentage Owned" labels={["investor", "buyer"]} data={[investorEquity, formatNum((1 - investorEquity))]} />
         </div>
