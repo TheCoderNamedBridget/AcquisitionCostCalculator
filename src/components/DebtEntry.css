@@ -1,5 +1,22 @@
 .debt-entry {
     display: flex;
     justify-content: space-between;
-    width: 300px;
+}
+
+/* bank */
+.debt-percentage-11\.5 {
+    background-color: #B0BEC5;
+    color: aliceblue;
+}
+
+/* seller */
+.debt-percentage-8 {
+    background-color: #4CAF50;
+    color: aliceblue;
+}
+
+/* investor */
+.debt-percentage-10 {
+    background-color: #0073e6;
+    color: aliceblue;
 }
