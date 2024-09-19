@@ -4,7 +4,6 @@ import Dscr from './Pages/Dscr';
 import DebtTable from './Pages/DebtTable';
 import Irr from './Pages/Irr';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
-import ProfitMarginGraph from './Pages/ProfitMarginGraph';
 
 function App() {
   return (
@@ -21,9 +20,6 @@ function App() {
           <NavLink to="/debt-table" className="nav-link" >
             Debt Table (wip)
           </NavLink>
-          <NavLink to="/profit-margin-graph" className="nav-link" >
-            Profit Margin (wip)
-          </NavLink>
         </nav>
 
         <div className="content">
@@ -31,7 +27,6 @@ function App() {
             <Route path="/" element={<Dscr />} />
             <Route path="/irr" element={<Irr />} />
             <Route path="/debt-table" element={<DebtTable />} />
-            <Route path="/profit-margin-graph" element={<ProfitMarginGraph />} />
           </Routes>
         </div>
       </Router>
