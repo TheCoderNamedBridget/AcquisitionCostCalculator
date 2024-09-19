@@ -43,13 +43,13 @@ const Dscr = () => {
      * @returns number
      */
     function calculateAnnualDebtPayment(interestRate: number, principalAmount: number, loanTerm: number) {
-        const decimalInterestRate = interestRate / 100
+        const decimalInterestRate = interestRate;
 
-        const numerator = (decimalInterestRate * principalAmount)
-        const denominator = 1 - ((1 + decimalInterestRate) ** -loanTerm)
-        let annualPayment = numerator / denominator
+        const numerator = (decimalInterestRate * principalAmount);
+        const denominator = 1 - ((1 + decimalInterestRate) ** -loanTerm);
+        let annualPayment = numerator / denominator;
 
-        return formatNum(annualPayment)
+        return formatNum(annualPayment);
     }
 
     /**
@@ -80,7 +80,7 @@ const Dscr = () => {
         let summedPayment = debtPayments.length > 0 ? debtPayments.reduce((curSum, curVal) => curSum + curVal) : 0;
         let denominator = summedPayment;
 
-        let dscr = sde / (denominator)
+        let dscr = sde / (denominator);
 
         return dscr
     }
