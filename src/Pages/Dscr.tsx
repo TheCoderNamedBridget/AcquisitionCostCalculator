@@ -16,8 +16,8 @@ import DraggablePieChart from "../components/draggable-pie-chart/DraggablePieCha
 
 const Dscr = () => {
     const [purchasePrice, setPurchasePrice] = useState(10);
-    const [downPayment, setDownPayment] = useState(0); //inital buyer investment
-    const [sde, setSde] = useState(1);
+    const [downPayment, setDownPayment] = useState(2); //inital buyer investment
+    const [sde, setSde] = useState(3);
     const [debts, setDebts] = useState<DebtItem[]>([]);
     const [dscr, setDscr] = useState(0);
 
@@ -89,9 +89,9 @@ const Dscr = () => {
             canvas.width = 300;
             canvas.height = 250;
             var proportions = [
-                { proportion: 50, format: { color: "#4CAF50", label: 'Seller' } },
-                { proportion: 20, format: { color: "#0073e6", label: 'Investor' } },
-                { proportion: 30, format: { color: "#B0BEC5", label: 'Bank' } },];
+                { proportion: 15, format: { color: "#4CAF50", label: 'Seller' } },
+                { proportion: 5, format: { color: "#0073e6", label: 'Investor' } },
+                { proportion: 80, format: { color: "#B0BEC5", label: 'Bank' } },];
             const piechart = new DraggablePieChart({
                 canvas: canvas,
                 proportions: proportions,
@@ -117,6 +117,7 @@ const Dscr = () => {
                 <div className="inputs">
                     <br />
                     <LabelledInput labelText={"Purchase Price"} value={purchasePrice} setValue={setPurchasePrice} />
+                    {/* typical down payment for business is 10-30% of purchase price */}
                     <LabelledInput labelText={"Down Payment"} value={downPayment} setValue={setDownPayment} />
                     <LabelledInput labelText={"SDE"} value={sde} setValue={setSde} />
                     <div className="row">
