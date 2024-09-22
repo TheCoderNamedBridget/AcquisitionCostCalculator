@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import LabelledInput from "../components/LabelledInput";
 import DebtSection from "../components/DebtSection";
-import { DebtItem, defaultBankDebtItem, defaultInvestorDebtItem, defaultSellerDebtItem } from "../types";
-import { formatNum } from "../utilities";
+import { DebtItem, defaultBankDebtItem, defaultSellerDebtItem } from "../types";
+import { calculateDscr, formatNum } from "../utilities";
 import DraggablePieChart from "../components/draggable-pie-chart/DraggablePieChart";
 
 /**
@@ -31,62 +31,8 @@ const Dscr = () => {
 
     const [stepUp, setStepUp] = useState("1.7");
 
-    /**
-     * For a debt item calculate the payment in a given year, rounded to 2 decimal
-     * annual payment = (r * pv) / (1 - (1 + r))^x
-     * r = interestRate (assume the user will enter as % ex: 10% not 0.1)
-     * pv = principalAmount
-     * x = loanTerm
-     * @param interestRate
-     * @param principalAmount
-     * @param loanTerm
-     * @returns number
-     */
-    function calculateAnnualDebtPayment(interestRate: number, principalAmount: number, loanTerm: number) {
-        const decimalInterestRate = interestRate;
-
-        const numerator = (decimalInterestRate * principalAmount);
-        const denominator = 1 - ((1 + decimalInterestRate) ** -loanTerm);
-        let annualPayment = numerator / denominator;
-
-        return formatNum(annualPayment);
-    }
-
-    /**
-     * This is a wrapper function that calculates the acculumated debt with interest
-     * and the loanTerm - the number of years deferred
-     * principal with interest = pv * (1 + r)^y
-     * new loan term = x - y
-     * y = num years deferred payments
-     * @param interestRate
-     * @param principalAmount
-     * @param loanTerm
-     * @param yearsDeferred when 0, payments start in year 1
-     * @returns number
-     */
-    function calculateDeferredAnnualDebtPayment(interestRate: number, principalAmount: number, loanTerm: number, yearsDeferred: number) {
-        let principalWithInterest = (principalAmount * ((1 + interestRate) ** yearsDeferred));
-
-        console.log("interestRate", interestRate);
-
-        console.log("principalWithInterest", principalWithInterest);
-        let newLoanTerm = loanTerm - yearsDeferred;
-
-        return calculateAnnualDebtPayment(interestRate, principalWithInterest, newLoanTerm)
-    }
-
-    function calculateDscr(year: number = 1) {
-        let debtPayments = debts.map((debt) => calculateDeferredAnnualDebtPayment((debt.interestRate / 100), debt.principal, debt.loanTerm, 0))
-        let summedPayment = debtPayments.length > 0 ? debtPayments.reduce((curSum, curVal) => curSum + curVal) : 0;
-        let denominator = summedPayment;
-
-        let dscr = sde / (denominator);
-
-        return dscr
-    }
-
     useEffect(() => {
-        setDscr(calculateDscr())
+        setDscr(calculateDscr(debts, sde))
     }, [purchasePrice, downPayment, sde, debts]);
 
     useEffect(() => {
