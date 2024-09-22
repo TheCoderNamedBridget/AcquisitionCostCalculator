@@ -48,12 +48,14 @@ export function calculateDeferredAnnualDebtPayment(interestRate: number, princip
     let principalWithInterest = (principalAmount * ((1 + interestRate) ** yearsDeferred));
     let newLoanTerm = loanTerm - yearsDeferred;
 
-    return calculateAnnualDebtPayment(interestRate, principalWithInterest, newLoanTerm)
+    let annualPayment = calculateAnnualDebtPayment(interestRate, principalWithInterest, newLoanTerm);
+
+    return annualPayment;
 }
 
 
 export function calculateDscr(debts: DebtItem[], sde: number, year: number = 1) {
-    let debtPayments = debts.map((debt) => calculateDeferredAnnualDebtPayment((debt.interestRate / 100), debt.principal, debt.loanTerm, 0));
+    let debtPayments = debts.map((debt) => calculateDeferredAnnualDebtPayment((debt.interestRate), debt.principal, debt.loanTerm, 0));
     let summedPayment = debtPayments.length > 0 ? debtPayments.reduce((curSum, curVal) => curSum + curVal) : 0;
     let denominator = summedPayment;
     let dscr = sde / (denominator);

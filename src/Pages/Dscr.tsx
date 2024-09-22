@@ -12,6 +12,13 @@ import DraggablePieChart from "../components/draggable-pie-chart/DraggablePieCha
  * Debt payments start in year 0
  * Payments are made in equal amounts over the loan term
  * 
+ * DSCR notes: 
+ * Big impact: 
+ * - changing sde/noi
+ * Small impact:
+ * - changing the principal loan amount
+ * - changing the debt source seller(8%) => investor(11.5%) 
+ * 
  * TODO: consider adding FCCR in future (accounts for investor payments)
  * 
  */
