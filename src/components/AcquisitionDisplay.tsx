@@ -8,6 +8,9 @@ export type AcquisitionObject = {
     downPayment: number;
     sde: number;
     stepUp: string;
+    sellerPercentage: number;
+    bankPercentage: number;
+    investorPercentage: number;
 }
 
 type AcquisitionDisplayProps = {
@@ -25,6 +28,9 @@ const AcquisitionDisplay = ({ business, showBusiness }: AcquisitionDisplayProps)
             <div className="row"><label>Down Payment:</label>  {business.downPayment}</div>
             <div className="row"><label>SDE:</label>  {business.sde}</div>
             <div className="row"><label>Step up:</label>  {business.stepUp}</div>
+            <div className="row"><label>Seller Percentage:</label>  {business.sellerPercentage}</div>
+            <div className="row"><label>Bank Percentage:</label>  {business.bankPercentage}</div>
+            <div className="row"><label>Investor Percentage:</label>  {business.investorPercentage}</div>
             <button onClick={() => showBusiness(business)}>Show</button>
             <br />
         </div>

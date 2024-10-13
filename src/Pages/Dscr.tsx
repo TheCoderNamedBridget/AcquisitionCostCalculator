@@ -40,11 +40,11 @@ const Dscr = () => {
     const [debts, setDebts] = useState<DebtItem[]>([]);
     const [dscr, setDscr] = useState(0);
 
-    const [bankAmount, setBankAmount] = useState(0);
+    const [sellerPercentage, setSellerPercentage] = useState(80);
     // The investor amount is not debt, you do not buy pay it down
     // they buy it and own it 
-    const [investorAmount, setInvestorAmount] = useState(0);
-    const [sellerAmount, setSellerAmount] = useState(0);
+    const [investorPercentage, setInvestorPercentage] = useState(5);
+    const [bankPercentage, setBankPercentage] = useState(15);
 
     const [stepUp, setStepUp] = useState("1.7");
 
@@ -54,14 +54,19 @@ const Dscr = () => {
         setPurchasePrice(business.purchasePrice);
         setDownPayment(business.downPayment);
         setSde(business.sde);
+        setSellerPercentage(business.sellerPercentage);
+        setInvestorPercentage(business.investorPercentage);
+        setBankPercentage(business.bankPercentage);
+
+        setCookieToDelete(business.name);
     }
 
     function onPieChartChange(piechart: DraggablePieChart) {
         var percentages = piechart.getAllSliceSizePercentages();
 
-        setSellerAmount(formatNum(percentages[0]) / 100);
-        setInvestorAmount(formatNum(percentages[1]) / 100);
-        setBankAmount(formatNum(percentages[2]) / 100);
+        setSellerPercentage(formatNum(percentages[0] / 100));
+        setInvestorPercentage(formatNum(percentages[1] / 100));
+        setBankPercentage(formatNum(percentages[2] / 100));
     }
 
     const getParseAcquisitionCookies = () => {
@@ -71,7 +76,6 @@ const Dscr = () => {
         Object.entries(allCookies).forEach(([key, value]) => {
             try {
                 acquisitionObjects.push(JSON.parse(value));
-
             } catch (e) {
                 console.error(`Error parsing cookie ${key}`, e)
             }
@@ -103,9 +107,9 @@ const Dscr = () => {
             canvas.width = 300;
             canvas.height = 250;
             var proportions = [
-                { proportion: 15, format: { color: "#4CAF50", label: 'Seller' } },
-                { proportion: 5, format: { color: "#0073e6", label: 'Investor' } },
-                { proportion: 80, format: { color: "#B0BEC5", label: 'Bank' } },];
+                { proportion: sellerPercentage, format: { color: "#4CAF50", label: 'Seller' } },
+                { proportion: investorPercentage, format: { color: "#0073e6", label: 'Investor' } },
+                { proportion: bankPercentage, format: { color: "#B0BEC5", label: 'Bank' } },];
             const piechart = new DraggablePieChart({
                 canvas: canvas,
                 proportions: proportions,
@@ -154,7 +158,10 @@ const Dscr = () => {
                             purchasePrice: purchasePrice,
                             downPayment: downPayment,
                             sde: sde,
-                            stepUp: stepUp
+                            stepUp: stepUp,
+                            sellerPercentage: sellerPercentage,
+                            investorPercentage: investorPercentage,
+                            bankPercentage: bankPercentage,
                         })}
                         disabled={name === ""}
                     >
@@ -179,12 +186,12 @@ const Dscr = () => {
                         debts={debts}
                         setDebts={setDebts}
                         dscr={dscr}
-                        bankAmount={bankAmount}
-                        setBankAmount={setBankAmount}
-                        investorAmount={investorAmount}
-                        setInvestorAmount={setInvestorAmount}
-                        sellerAmount={sellerAmount}
-                        setSellerAmount={setSellerAmount}
+                        bankAmount={bankPercentage}
+                        setBankAmount={setBankPercentage}
+                        investorAmount={investorPercentage}
+                        setInvestorAmount={setInvestorPercentage}
+                        sellerAmount={sellerPercentage}
+                        setSellerAmount={setSellerPercentage}
                         stepUp={Number(stepUp)}
                     />
                 </div>
