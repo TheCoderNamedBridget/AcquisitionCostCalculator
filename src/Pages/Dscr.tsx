@@ -123,14 +123,16 @@ const Dscr = () => {
             <h2 className="header">Dscr</h2>
             <button onClick={() => setShowBusinesses(!showBusinesses)}>{showBusinesses ? "Hide " : "Show "} Businesses</button>
             <div className="display">
-                {showBusinesses && <div className="inputs">
-                    <h2>Stored Businesses:</h2>
-                    {cookies.map((cookie, index) =>
-                        <div key={index} className="cookies">
-                            <AcquisitionDisplay business={cookie} showBusiness={fillInputs} />
-                        </div>
-                    )}
-                </div>}
+                <div className="cookie-section">
+                    {showBusinesses && <>
+                        <h2>Stored Businesses:</h2>
+                        {cookies.map((cookie, index) =>
+                            <div key={index} className="cookies">
+                                <AcquisitionDisplay business={cookie} showBusiness={fillInputs} />
+                            </div>
+                        )}
+                    </>}
+                </div>
                 <div className="inputs">
                     <br />
                     <LabelledStringInput labelText={"Name"} value={name} setValue={setName} />
