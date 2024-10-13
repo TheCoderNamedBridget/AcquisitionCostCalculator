@@ -23,8 +23,7 @@ import AcquisitionDisplay, { AcquisitionObject } from "../components/Acquisition
  * - changing the debt source seller(8%) => investor(11.5%) 
  * 
  * TODO: consider adding FCCR in future (accounts for investor payments)
- * TODO: add saving the percentages for ownership in cookie
- * 
+ * TODO: improve styling and usability for cookies
  */
 
 const Dscr = () => {
@@ -172,8 +171,8 @@ const Dscr = () => {
                     <br />
                     <br />
                     <>
-                        <LabelledStringInput labelText={"Cookie to Delete"} value={cookieToDelete} setValue={setCookieToDelete} />
-                        <button onClick={() => clearCookie(cookieToDelete)}>Delete Cookie</button>
+                        <LabelledStringInput labelText={"Business to remove"} value={cookieToDelete} setValue={setCookieToDelete} />
+                        <button onClick={() => clearCookie(cookieToDelete)}>Remove business</button>
                     </>
                     <br />
                     <br />
