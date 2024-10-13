@@ -562,9 +562,6 @@ var DraggablePieChart =(function () {
                     piechart.data[index].angle = draggedPie.startingAngles[index];
                 }
             }
-
-            //console.log(JSON.stringify(piechart.data));
-
         }
 
 
