@@ -31,8 +31,8 @@ const Dscr = () => {
     const [cookieToDelete, setCookieToDelete] = useState("");
     const [cookies, setCookies] = useState<AcquisitionObject[]>([]);
 
-    const [name, setName] = useState("");
-    const [url, setUrl] = useState("");
+    const [name, setName] = useState("Sample name");
+    const [url, setUrl] = useState("example.com");
     const [purchasePrice, setPurchasePrice] = useState(1000000);
     const [downPayment, setDownPayment] = useState(200000); //inital buyer investment
     const [sde, setSde] = useState(300000);
